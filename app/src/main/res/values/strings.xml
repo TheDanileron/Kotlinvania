@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Kotlinvania</string>
+    <string name="press_me">Press me</string>
+    <string name="log_history">Log history</string>
 </resources>
