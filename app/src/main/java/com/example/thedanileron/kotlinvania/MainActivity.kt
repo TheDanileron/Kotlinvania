@@ -12,7 +12,8 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private val TAG: String = "MainActivity"
-    val lambdaDiv = { x: Int, div: Int -> Log.i(TAG, "x/div : ${x / div}") }
+    // function type
+    val lambdaDiv: (Int, Int) -> Unit = { x: Int, div: Int -> Log.i(TAG, "x/div : ${x / div}") }
 
     // OnCreate returns Unit which means "no value"
     override fun onCreate(savedInstanceState: Bundle?) {
