@@ -13,7 +13,7 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
     private val TAG: String = "MainActivity"
     // function type
-    val lambdaDiv: (Int, Int) -> Unit = { x: Int, div: Int -> Log.i(TAG, "x/div : ${x / div}") }
+    val multiply: (Int, Int) -> Int = { x: Int, y: Int -> x * y }
 
     // OnCreate returns Unit which means "no value"
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         val spices = listOf("curry", "pepper", "cayenne", "ginger", "red curry", "green curry", "red pepper")
         val currys = spices.filter { it.contains("curry") }.sortedBy { it.length }.take(2)
         Log.i(TAG, "currys: $currys")
-        lambdaDiv(10, 5)
+        Log.i(TAG, "calculate : ${calculate(multiply, 5, 100)}")
     }
 
     // In Kotlin you can specify a default value of function variable
@@ -54,5 +54,7 @@ class MainActivity : AppCompatActivity() {
     // Kotlin one line function( function with single expression)
     fun isTooCold(temperature: Int) = temperature < 5
 
-
+    fun calculate(operation: (Int, Int) -> Int, x: Int, y: Int): Int {
+        return operation(x, y)
+    }
 }
