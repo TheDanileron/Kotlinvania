@@ -8,43 +8,33 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    // val creates constant
-    private val TAG = "MainActivity"
-    private val mButtonPressHistory: ButtonPressHistory = ButtonPressHistory(100)
-    // ? mark means the value can be null
-    private val currentDay: Int? = null
+    private val TAG: String = "MainActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-    }
 
-    fun dayToString(day: Int): String {
-        return when (day) {
-            1 -> "Monday"
-            2 -> "Tuesday"
-            3 -> "Wednesday"
-            4 -> "Thursday"
-            5 -> "Friday"
-            6 -> "Saturday"
-            7 -> "Sunday"
-            else -> "Undefined"
+        // U can call methods on numbers. Kotlin will convert them to Object automatically
+        2.plus(71).plus(233).minus(13).div(30).plus(1)
+
+        // Loop from 0 to 100 with step 7
+        for (i in 0..100 step 7) {
+            Log.i(TAG, "i : $i")
         }
-    }
 
-    public fun btnOnClick(view: View) {
-        when (view.id) {
-            R.id.btn -> {
-                when (textView.text) {
-                    "You pressed me" -> textView.text = "And again"
-                    "And again" -> textView.text = "You love it don't ya?"
-                    else -> textView.text = "You pressed me"
-                }
-                mButtonPressHistory.insertEntry(textView.text as String)
-            }
-            R.id.btnLogHistory -> {
-                Log.i(TAG, mButtonPressHistory.mHistoryMap.toString())
-            }
+        for (i in 'a'..'m') {
+            Log.i(TAG, "i : $i")
+        }
+
+        for (i in 5 downTo 1) {
+            Log.i(TAG, "i : $i")
+        }
+
+        val aquarium = arrayOf("tuna", "shark", "eel")
+
+        // We can loop through index-element array
+        for ((index, fish) in aquarium.withIndex()) {
+            Log.i(TAG, "index : $index; fish(element): $fish")
         }
     }
 
