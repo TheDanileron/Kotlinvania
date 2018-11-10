@@ -1,41 +1,57 @@
 package com.example.thedanileron.kotlinvania
 
+import android.app.Service
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.IBinder
 import android.util.Log
 import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
-
     private val TAG: String = "MainActivity"
+    val lambdaDiv = { x: Int, div: Int -> Log.i(TAG, "x/div : ${x / div}") }
 
+    // OnCreate returns Unit which means "no value"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // U can call methods on numbers. Kotlin will convert them to Object automatically
-        2.plus(71).plus(233).minus(13).div(30).plus(1)
+        for (i in 1..10)
+            Log.i(TAG, dayToString(Random().nextInt(8)))
 
-        // Loop from 0 to 100 with step 7
-        for (i in 0..100 step 7) {
-            Log.i(TAG, "i : $i")
-        }
 
-        for (i in 'a'..'m') {
-            Log.i(TAG, "i : $i")
-        }
+        Log.i(TAG, "No value:${dayToString()}")
+        var shouldGo = shouldGoOut("Sunday", isRaining = false, temperature = 3)
 
-        for (i in 5 downTo 1) {
-            Log.i(TAG, "i : $i")
-        }
+        val spices = listOf("curry", "pepper", "cayenne", "ginger", "red curry", "green curry", "red pepper")
+        val currys = spices.filter { it.contains("curry") }.sortedBy { it.length }.take(2)
+        Log.i(TAG, "currys: $currys")
+        lambdaDiv(10, 5)
+    }
 
-        val aquarium = arrayOf("tuna", "shark", "eel")
-
-        // We can loop through index-element array
-        for ((index, fish) in aquarium.withIndex()) {
-            Log.i(TAG, "index : $index; fish(element): $fish")
+    // In Kotlin you can specify a default value of function variable
+    fun dayToString(day: Int = 1): String {
+        return when (day) {
+            1 -> "Monday"
+            2 -> "Tuesday"
+            3 -> "Wednesday"
+            4 -> "Thursday"
+            5 -> "Friday"
+            6 -> "Saturday"
+            7 -> "Sunday"
+            else -> "Undefined"
         }
     }
+
+    fun shouldGoOut(day: String, temperature: Int = 15, isRaining: Boolean): Boolean {
+        return (day == "Sunday" || day == "Saturday") && !isRaining && !isTooCold(temperature)
+    }
+
+    // Kotlin one line function( function with single expression)
+    fun isTooCold(temperature: Int) = temperature < 5
+
 
 }
